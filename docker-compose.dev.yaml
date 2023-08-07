@@ -12,6 +12,15 @@ services:
       dockerfile: ./php/Dockerfile
     volumes:
       - ./app:/var/www/html
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: Jur@doIntra
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: b4hr3UQEO6d5
+      MYSQL_DATABASE: mifj
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
   # mysql
   db:
     image: mysql:8.0
@@ -21,12 +30,16 @@ services:
       - "3306:3306"
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      MYSQL_USER: user
-      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: Jur@doIntra
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: b4hr3UQEO6d5
       MYSQL_DATABASE: mifj
 
   # redis
+  cache:
+    image: redis:latest
+    ports:
+      - "6379"
+
 volumes:
   mysqldata:
