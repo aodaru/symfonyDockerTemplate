@@ -6,7 +6,7 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 # Install php extensions
 # exit on errors, exit on unset variables, print every command as it is executed
 RUN set -eux; \
-    install-php-extensions pdo pdo_mysql apcu opcache;
+    install-php-extensions pdo pdo_mysql apcu opcache gd;
 
 # RUN docker-php-ext-install pdo pdo_mysql
 
@@ -41,10 +41,7 @@ RUN apk add nodejs npm
 # Get npm
 # COPY --from=node:lts /usr/local/lib/node_modules /usr/local/lib/node_modules
 
-COPY ./app/package*json ./
-
 RUN npm install
-
 
 # Dev image
 # This stage is meant to be target-built into a separate image

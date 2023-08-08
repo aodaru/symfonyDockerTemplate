@@ -13,6 +13,7 @@ services:
 
     volumes:
       - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+
   # PHP
   app:
     build:
@@ -24,17 +25,17 @@ services:
         ipv4_address: 172.20.10.3
 
     volumes:
-      # - ./app:/var/www/html
+      - ./app:/var/www/html
       - ./php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
 
     environment:
       MYSQL_HOST: db
-      MYSQL_PORT: 3306
-      MYSQL_ROOT_PASSWORD: Jur@doIntra
-      MYSQL_USER: dbuser
-      MYSQL_PASSWORD: b4hr3UQEO6d5
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE:
-        mifj
+        ${MYSQL_DATABASE}
 
         #      REDIS_HOST: cache
         # REDIS_PORT: 6379
@@ -59,10 +60,10 @@ services:
 
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: Jur@doIntra
-      MYSQL_USER: dbuser
-      MYSQL_PASSWORD: b4hr3UQEO6d5
-      MYSQL_DATABASE: mifj
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
   # redis
   # cache:
